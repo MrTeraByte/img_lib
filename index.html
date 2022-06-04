@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no,user-scalable=no">
+<meta name="theme-color" content="#000" />
+
+<link rel="icon" href="images/losetOn.png" type="image/icon type">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@900&display=swap" rel="stylesheet">
+
+
+<script src="https://kit.fontawesome.com/d00f9d52fa.js" crossorigin="anonymous"></script>
+<script src="../openingIntro/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<title>Image lib</title>
+
+<style type="text/css">
+@font-face {
+  font-family: quanslim;
+  src: url(fonts/QuanSlim-Bold.ttf);
+}
+body  {
+	color:white;
+	padding: 0;
+	background: #141E30;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	font-family:quanslim;
+}
+/* styles for warning massage for destop screens */
+.warning{
+	border: 1px solid red;
+	margin: 5%;
+	font-size: 26px;
+	display: none;
+}
+
+/*style and animation for loadimg screens */
+
+.loading{
+	background: black;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left:0;
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	z-index: 99;
+}
+
+.loading-fade-out{
+	display: none;
+	animation-name: fadeout;
+	animation-duration: 1s;
+	animation-delay: 0s;
+	animation-timing-function:ease-out;
+}
+@keyframes fadeout{
+	0%{
+		opacity:1;
+		display: flex;
+	}
+	100%{
+		opacity: 0;
+		display:none;
+	}
+}
+
+
+/* styles for the profile/heading */
+#profile {
+	width: 100%;
+	font-size: 2em;
+	text-align: center;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+#profile-text {
+	line-height: 0.8;
+	animation-name: profile_intro;
+	animation-duration: 1s;
+}
+@keyframes profile_intro{
+	0%{
+		letter-spacing: -10px;
+		opacity:0;
+	}
+	100%{
+		letter-spacing:normal;
+	}
+}
+
+#profile-text-two{
+	font-size: 24px;
+} 
+#name{
+	font-size: 3em;
+	color: white;
+	text-decoration:underline;
+	animation-name: name_intro;
+	animation-duration: 1s;
+	animation-timing-function:ease-in-out;
+}
+@keyframes name_intro{
+	0%{
+		letter-spacing: 30px;
+		font-size: 4em;
+		opacity: 0.5;
+	}
+	70%{
+		letter-spacing: 0px;	
+	}
+	90%{
+		letter-spacing:0px;
+	}
+	100%{
+		letter-spacing:normal;
+	}
+}
+#profile img{
+	width: 50%;
+	padding: 5px;
+	border: 1px solid lightgreen;
+	border-radius: 50%;
+}
+/* styles for the image container/grid */
+.images  {
+	display: none;
+	grid-template-columns: auto auto ;
+	column-gap: 10px;
+	row-gap: 10px;
+	margin-bottom: 5%;
+}
+.container .images img{
+	width: 100%;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	transition: 0.5s;
+	animation-name: img-fade;
+	animation-duration: 1s;
+}
+@keyframes img-fade {
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+.container .images img:hover{
+	box-shadow: 0 0 10px #2285ee;
+}
+.images img:nth-child(3){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+.images img:nth-child(4){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+.images img:nth-child(7){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+
+@keyframes removeblur {
+	0%{
+		filter: blur(8px);
+		-webkit-filter: blur(8px);
+	}
+	40%{		
+		filter: blur(6px);
+		-webkit-filter: blur(6px);
+	}
+	60%{	
+		filter: blur(4px);
+		-webkit-filter: blur(4px);
+	}
+	80%{		
+		filter: blur(2px);
+		-webkit-filter: blur(2px);
+	}
+	100%{		
+		filter: blur(0px);
+		-webkit-filter: blur(0px);
+	}
+}
+
+/*styles for the image shower*/
+.image-shower{	
+	display: none;
+	width: 90%;
+	position:fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 15px black;
+}
+.image-wraper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.image-wraper img{
+	width: 100%;
+	height: 100%;
+}
+.image-wraper button {
+	background: none;
+	color: white;
+	border: 1px solid white;
+	padding: 5%;
+	width: 100%;
+	font-family:quanslim;
+	font-size: 16px;
+	transition: 255ms ease-out;
+}
+.image-wraper button:hover{
+	background: rgba(255,255,255,0.5);
+}
+
+/*Styles for footer */
+.footer {
+	text-align: center;
+	font-size: 16px;
+	width: 80%;
+	margin: auto;
+	display: none
+}
+.footer i{
+	font-size: 30px;
+}
+
+.footer a{
+	background: none;
+	color: white;
+	text-decoration: underline;
+	font-size:50px;
+	transition: 1s;
+}
+.footer a:hover{
+	text-decoration:none;
+}
+
+/* style for destop screens */
+@media only screen and (min-width: 768px){
+ 	.warning{
+ 		display: block;
+ 	}
+ }
+</style>
+
+</head>
+<body>
+
+<div class="loading" >
+	<h1 id="loading_text" >Loading!</h1>
+</div >
+
+<div class="warning" >
+	<h1>Better desktop version coming soon!</h1>
+</div>
+
+<div id="profile" >
+	<img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/274036237_451509316618861_50517689582697960_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=104&ccb=1-7&_nc_sid=85a577&efg=eyJpIjoidCJ9&_nc_eui2=AeGmEJQu-I7P2ijCeBNx_W5Po_s8Rn2_5ESj-zxGfb_kRJbH5j40_4e74a9h1Qf9jt-q57oTMBQhM3juAMXHiQGd&_nc_ohc=VB5v5GdOYPoAX_s4X6x&tn=ibIqZFZDy_Ca4KMC&_nc_ht=scontent.fdac5-2.fna&oh=00_AT8fhNDAE_MBA1k3tEEgof-EC5jnG6lQlAxmDKnRZ1EM3Q&oe=62A1090B" >
+	
+	<div id="profile-text" >
+		<p>Hi,I am <br><a href="https://m.facebook.com/profile.php?id=100052793894374"  id="name" >Suprim</a></p>
+	</div>
+	
+	
+	<p id="profile-text-two" >And these are some of my favorite photgraphs!</p>
+	
+</div>
+
+<div class="container" >
+	<div class="images" >		
+		<img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/240384839_348177686952025_1618103048016252800_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=105&ccb=1-7&_nc_sid=7aed08&efg=eyJpIjoidCJ9&_nc_eui2=AeH_O36Uqng8JNdW323Cbq0ytAiGoWMMz3q0CIahYwzPeqAMcEskwzOBWeHlC7tYsiBLfZUYL9xpdI2Val_BrX7J&_nc_ohc=RZLQOgubb_gAX8QBGkh&_nc_ht=scontent.fdac5-2.fna&oh=00_AT9JYQfGCmDzoxd2JAUtpo3jV9urDbKxnYMagjsWRNPHRQ&oe=62A1522C" >
+		<img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-9/128525114_174444280992034_3461727598275309547_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=105&ccb=1-7&_nc_sid=13bebb&efg=eyJpIjoidCJ9&_nc_eui2=AeF-POepPF9PWcLLkjG8IGk_qyuQT7fYfParK5BPt9h89jHqpOPLcgJftusJVs3NWtBNAgxnuy5KzgHiAby8go4T&_nc_ohc=kGPLb61TVo8AX8mUt_T&_nc_ht=scontent.fdac5-2.fna&oh=00_AT-xktZRoPBDmxEfITpSCjU8hVfgFCx9qB0FNtdi6NxECw&oe=62BF3F95" >
+		<img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-9/195727216_296977002072094_6804893060619053117_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=105&ccb=1-7&_nc_sid=05277f&efg=eyJpIjoidCJ9&_nc_eui2=AeHFJI7q0sOzTVx7300dYv9qZjZdnVNIgFRmNl2dU0iAVNms0l5HLLkTyfG1QKHwiUMrLD8IU6su-avY5A2jcm6H&_nc_ohc=tzal7YxkUAcAX-6RFqE&_nc_ht=scontent.fdac5-2.fna&oh=00_AT-b9zuvIA5H5g2YMJEpbqiWPxDgAYsaYgCxjukYdrGBsQ&oe=62C141D8" >
+		<img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-9/139524481_207994724303656_424705460348233684_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=107&ccb=1-7&_nc_sid=7aed08&efg=eyJpIjoidCJ9&_nc_eui2=AeGJTaowVX54snP6Sl26qD2OF7dSSQmB-RIXt1JJCYH5ErVzmV8Oy_6bNXxYSRfKW0xtoyufONB_CYVo_5VgYTTL&_nc_ohc=YyVXxx4xH1AAX-pP8ZA&_nc_ht=scontent.fdac5-2.fna&oh=00_AT9VAwlP33qhfgtEdUed7xlwGZd7BIRMz_SewFHpI8MJtQ&oe=62C13AED" >	
+		<img src="https://demofree.sirv.com/nope-not-here.jpg?w=150" >	
+		<img src="https://demofree.sirv.com/nope-not-here.jpg?w=150" >
+	</div>	
+</div>
+
+<div class="image-shower">
+	<div class="image-wraper" >
+			<img>		
+				<button id="close-btn" >Close</button>
+	</div>
+</div>
+
+<div class="footer" >
+	<p>Made with  <i class="fa-solid fa-heart"></i>
+		<br>
+	by <a href="https://mrterabyte.github.io/" target="_blank"  >MrTeraByte</span></div>
+</div>
+
+<script type="text/javascript">
+let imgs = document.images,
+    len = imgs.length,
+    counter = 0,
+    loadingCover = $(".loading"),
+    closebtn = document.getElementById("close-btn"),
+    imgShower = $(".image-shower"),
+    proflie = $("#profile"),
+    container = $(".images");
+  
+  [].forEach.call( imgs, function( img ) {
+	  if(img.complete)
+		  incrementCounter();
+	  else
+		  img.addEventListener( 'load', incrementCounter, false );
+  } );
+  
+  function incrementCounter() {
+	  counter++;
+	  if ( counter === len ) {
+	  
+		 $("#loading_text").text("Loaded");
+		 
+		  loadingCover.fadeOut(500, () => {
+			  $("#profile").css("display","flex");
+		  });
+		  
+		  console.log( 'All images loaded!' );
+ 	 }
+  }
+
+ 
+$(".images img").click(function() {
+	let src = $(this).attr("src");
+	$(".image-shower img").attr("src", src);
+	
+	imgShower.fadeIn(500, () => { 
+		imgShower.css("display", "flex");
+		$(profile).css({
+			"filter" : "blur(8px)",
+			"-webkit-filter" : "blur(8px)"
+		});
+		$(container).css({
+			"filter" : "blur(8px)",
+			"-webkit-filter" : "blur(8px)"
+		});
+		$(".footer").css({
+		"filter" : "blur(8px)",
+		"-webkit-filter" : "blur(8px)"
+		});
+	});
+});
+ 
+$(closebtn).on("click", () => {
+	imgShower.fadeOut(500, () => {
+		$(profile).css(
+			"animation","removeblur 50ms ease-out"
+		).css({
+			"filter" : "blur(0px)",
+			"-webkit-filter" : "blur(0px)"
+		});
+		
+		$(".footer").css(
+			"animation","removeblur 50ms ease-out"
+		).css({
+			"filter" : "blur(0px)",
+			"-webkit-filter" : "blur(0px)"
+		});
+		
+		container.css(
+			"animation","removeblur 50ms"
+		).css({
+			"filter" : "blur(0px)",
+			"-webkit-filter" : "blur(0px)"
+		})
+	});
+})
+
+$("#profile-text").on("animationend", () => {
+	container.css("display" , "grid");
+})
+
+$(".container .images img").on("animationend", () => {
+	$(".footer").css("display","block");
+});
+</script>
+
+</body>
+</html>

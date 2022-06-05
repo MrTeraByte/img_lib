@@ -1,0 +1,237 @@
+@font-face {
+  font-family: quanslim;
+  src: url(fonts/QuanSlim-Bold.ttf);
+}
+body  {
+	color:white;
+	padding: 0;
+	background: #141E30;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	font-family:quanslim;
+}
+/* styles for warning massage for destop screens */
+.warning{
+	border: 1px solid red;
+	margin: 5%;
+	font-size: 26px;
+	display: none;
+}
+
+/*style and animation for loadimg screens */
+
+.loading{
+	background: black;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left:0;
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	z-index: 99;
+}
+
+.loading-fade-out{
+	display: none;
+	animation-name: fadeout;
+	animation-duration: 1s;
+	animation-delay: 0s;
+	animation-timing-function:ease-out;
+}
+@keyframes fadeout{
+	0%{
+		opacity:1;
+		display: flex;
+	}
+	100%{
+		opacity: 0;
+		display:none;
+	}
+}
+
+
+/* styles for the profile/heading */
+#profile {
+	width: 100%;
+	font-size: 2em;
+	text-align: center;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+#profile-text {
+	line-height: 0.8;
+	animation-name: profile_intro;
+	animation-duration: 1s;
+}
+@keyframes profile_intro{
+	0%{
+		letter-spacing: -10px;
+		opacity:0;
+	}
+	100%{
+		letter-spacing:normal;
+	}
+}
+
+#profile-text-two{
+	font-size: 24px;
+} 
+#name{
+	font-size: 3em;
+	color: white;
+	text-decoration:underline;
+	animation-name: name_intro;
+	animation-duration: 1s;
+	animation-timing-function:ease-in-out;
+}
+@keyframes name_intro{
+	0%{
+		letter-spacing: 30px;
+		font-size: 4em;
+		opacity: 0.5;
+	}
+	70%{
+		letter-spacing: 0px;	
+	}
+	90%{
+		letter-spacing:0px;
+	}
+	100%{
+		letter-spacing:normal;
+	}
+}
+#profile img{
+	width: 50%;
+	padding: 5px;
+	border: 1px solid lightgreen;
+	border-radius: 50%;
+}
+/* styles for the image container/grid */
+.images  {
+	display: none;
+	grid-template-columns: auto auto ;
+	column-gap: 10px;
+	row-gap: 10px;
+	margin-bottom: 5%;
+}
+.container .images img{
+	width: 100%;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	transition: 0.5s;
+	animation-name: img-fade;
+	animation-duration: 1s;
+}
+@keyframes img-fade {
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+.container .images img:hover{
+	box-shadow: 0 0 10px #2285ee;
+}
+.images img:nth-child(3){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+.images img:nth-child(4){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+.images img:nth-child(7){
+	grid-column-start:1;
+	grid-column-end: 3;
+} 
+
+@keyframes removeblur {
+	0%{
+		filter: blur(8px);
+		-webkit-filter: blur(8px);
+	}
+	40%{		
+		filter: blur(6px);
+		-webkit-filter: blur(6px);
+	}
+	60%{	
+		filter: blur(4px);
+		-webkit-filter: blur(4px);
+	}
+	80%{		
+		filter: blur(2px);
+		-webkit-filter: blur(2px);
+	}
+	100%{		
+		filter: blur(0px);
+		-webkit-filter: blur(0px);
+	}
+}
+
+/*styles for the image shower*/
+.image-shower{	
+	display: none;
+	width: 90%;
+	position:fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 15px black;
+}
+.image-wraper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.image-wraper img{
+	width: 100%;
+	height: 100%;
+}
+.image-wraper button {
+	background: none;
+	color: white;
+	border: 1px solid white;
+	padding: 5%;
+	width: 100%;
+	font-family:quanslim;
+	font-size: 16px;
+	transition: 255ms ease-out;
+}
+.image-wraper button:hover{
+	background: rgba(255,255,255,0.5);
+}
+
+/*Styles for footer */
+.footer {
+	text-align: center;
+	font-size: 16px;
+	width: 80%;
+	margin: auto;
+	display: none
+}
+.footer i{
+	font-size: 30px;
+}
+
+.footer a{
+	background: none;
+	color: white;
+	text-decoration: underline;
+	font-size:50px;
+	transition: 1s;
+}
+.footer a:hover{
+	text-decoration:none;
+}
+
+/* style for destop screens */
+@media only screen and (min-width: 768px){
+ 	.warning{
+ 		display: block;
+ 	}
+ }
